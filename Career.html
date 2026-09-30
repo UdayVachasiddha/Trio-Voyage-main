@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Careers — TrioVoyage</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f7f9;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --accent2:#10B981;
+      --footer-bg:#0b1730;
+      --footer-muted:#93a0b8;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#fbfbfd,#f7f7f9);color:#0b1220;-webkit-font-smoothing:antialiased;line-height:1.45}
+    .container{max-width:1200px;margin:0 auto;padding:28px 20px}
+
+/* NAV placeholder */
+#main-navbar { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+
+/* Hero */
+.hero{
+  position:relative;
+  background-image:url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;background-position:center;padding:72px 0 56px;color:#fff;
+}
+.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.06));pointer-events:none}
+.hero .hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 20px}
+.breadcrumb{opacity:0.95;margin-bottom:12px;font-size:14px}
+.hero h1{margin:0;font-size:34px;line-height:1.03;font-weight:800}
+.hero p.lead{margin-top:10px;opacity:0.95;color:rgba(255,255,255,0.92)}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;margin-top:28px}
+@media (max-width:980px){ .layout{grid-template-columns:1fr} }
+
+/* Jobs list */
+.jobs-card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 12px 36px rgba(2,6,23,0.04);border:1px solid rgba(15,23,42,0.03)}
+.jobs-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:12px}
+.job {
+  display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:12px;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  border:1px solid rgba(15,23,42,0.04);
+  border-left:3px solid #2563eb;
+  transition:transform 0.18s,box-shadow 0.18s;
+}
+.job:hover{transform:translateX(3px);box-shadow:0 12px 36px rgba(2,6,23,0.07);}
+.job .meta {flex:1}
+.job h4{margin:0;font-size:16px}
+.job p.short{margin:6px 0;color:var(--muted);font-size:14px}
+.job .btns{display:flex;gap:8px;align-items:center}
+.btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+.btn.secondary{background:transparent;border:1px solid rgba(15,23,42,0.06)}
+.btn.primary{background:var(--accent);color:#fff}
+
+/* Sidebar apply panel */
+.apply-panel{background:linear-gradient(180deg,#fff,#fbfdff);padding:18px;border-radius:12px;border:1px solid rgba(15,23,42,0.03);box-shadow:0 12px 36px rgba(2,6,23,0.04)}
+.apply-panel h4{margin:0 0 8px 0}
+.apply-panel label{display:block;font-size:13px;color:var(--muted);margin-top:8px}
+.apply-panel input[type="text"], .apply-panel input[type="email"], .apply-panel textarea, .apply-panel input[type="file"]{
+  width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);margin-top:6px;font-size:14px;
+}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.5);display:flex;align-items:center;justify-content:center;z-index:90}
+.modal{width:95%;max-width:880px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(2,6,23,0.3)}
+.modal .modal-body{padding:20px}
+.modal .modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(15,23,42,0.03)}
+.modal .modal-header h3{margin:0}
+.modal .modal-actions{display:flex;gap:10px;margin-top:14px;}
+
+/* Footer same as other pages */
+.site-footer{
+  background:var(--footer-bg);
+  color:var(--footer-muted);
+  padding:42px 20px;
+  margin-top:30px;
+}
+.site-footer .footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:28px;
+  align-items:start;
+}
+.site-footer h5{color:#ffffff;margin:0 0 14px 0;font-size:16px}
+.site-footer p, .site-footer a, .site-footer li {color:var(--footer-muted);font-size:14px;line-height:1.6;margin:0;text-decoration:none}
+.site-footer a:hover{color:#fff}
+.container.copyright{border-top:1px solid rgba(255,255,255,0.03);padding-top:22px;margin-top:26px;color:#93a0b8;font-size:13px}
+
+/* Utilities */
+.muted{color:var(--muted)}
+.kicker{display:inline-block;background:linear-gradient(135deg,#eff6ff,#dbeafe);padding:6px 12px;border-radius:999px;font-size:13px;color:#2563eb;font-weight:700;border:1px solid rgba(37,99,235,0.12);}
+/* form font + file input styling */
+input,textarea,button,select{font-family:inherit;}
+.apply-panel input[type="file"]{cursor:pointer;}
+.apply-panel input[type="file"]::-webkit-file-upload-button{background:linear-gradient(135deg,#0ea5a4,#2563eb);color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600;}
+input:focus,textarea:focus,select:focus{border-color:rgba(37,99,235,0.25);box-shadow:0 0 0 3px rgba(37,99,235,0.06);outline:none;}
+
+@media (max-width:700px){
+  .layout{grid-template-columns:1fr}
+}
+  </style>
+</head>
+<body>
+
+  <!-- navbar (shared) -->
+  <nav id="main-navbar" class="nav-wrap" aria-label="Main navigation" style="font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;">
+  <div style="max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12);font-size:18px">TV</div>
+        <div style="line-height:1">
+          <div style="font-weight:700">TrioVoyage</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px">Curated tours · Trusted travel</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="nav-toggle" aria-expanded="false" aria-controls="nav-links" style="display:none;padding:8px 10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;cursor:pointer">Menu</button>
+
+      <div id="nav-links" style="display:flex;gap:18px;align-items:center">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="aboutus.html">Our Story</a>
+        <a class="nav-link" href="faq.html">FAQ's</a>
+        <a class="nav-link" href="Blogs.html">Blogs</a>
+        <a class="nav-link" href="Career.html">Careers</a>
+        <a class="nav-link" href="ContactUs.html">Contact</a>
+        <a href="contact.html" class="nav-cta" style="margin-left:12px;padding:9px 14px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12)">Request Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* small navbar styles included so this fragment works when injected */
+    #main-navbar .nav-link{color:#475569;text-decoration:none;font-weight:600;font-size:14px}
+    #main-navbar .nav-link.active{color:#2563eb;border-bottom:2px solid #2563eb;padding-bottom:4px}
+
+    /* responsive: show toggle on small screens and hide links */
+    @media (max-width:880px){
+      #nav-toggle{display:inline-block}
+      #nav-links{display:none;flex-direction:column;background:rgba(255,255,255,0.98);position:absolute;left:12px;right:12px;top:72px;padding:14px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.08)}
+      #nav-links a{display:block;padding:8px 6px}
+    }
+  </style>
+
+  <script>
+    // Navbar behaviour: toggle for mobile + active-link marking
+    (function(){
+      const toggle = document.getElementById('nav-toggle');
+      const links = document.getElementById('nav-links');
+      if(toggle && links){
+        toggle.addEventListener('click', ()=>{
+          const expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!expanded));
+          links.style.display = expanded ? 'none' : 'flex';
+        });
+      }
+
+      // mark active nav-link based on current URL
+      function markActive(){
+        const path = window.location.pathname.split('/').pop().toLowerCase();
+        const navLinks = document.querySelectorAll('#main-navbar .nav-link');
+        navLinks.forEach(a=>{
+          a.classList.remove('active');
+          const href = (a.getAttribute('href')||'').split('/').pop().toLowerCase();
+          if(href === path || (path === '' && (href === 'index.html' || href === ''))) a.classList.add('active');
+        });
+      }
+      // run after short delay in case fragment injected dynamically
+      setTimeout(markActive, 50);
+      window.addEventListener('popstate', markActive);
+    })();
+  </script>
+</nav>
+
+  <!-- Hero -->
+  <header class="hero" role="banner" aria-labelledby="career-title">
+    <div class="overlay" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="breadcrumb">Home › <strong>Careers</strong></div>
+      <h1 id="career-title">Careers at TrioVoyage</h1>
+      <p class="lead">Join our team — we’re building memorable trips and want people who care about service, safety and stories.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="layout">
+      <!-- Left: open roles -->
+      <div>
+        <section class="jobs-card" aria-labelledby="open-roles">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h2 id="open-roles" style="margin:0">Open roles</h2>
+              <p class="muted" style="margin-top:6px">Current vacancies in operations, product and guiding. Click a role to view details and apply.</p>
+            </div>
+            <div><span class="kicker">Hiring now</span></div>
+          </div>
+
+          <div class="jobs-grid" id="jobs-grid">
+            <!-- jobs injected by JS -->
+          </div>
+
+          <div style="margin-top:18px;color:var(--muted);font-size:13px">
+            Can't find the right role? Email your CV to <a href="mailto:hello@triovoyage.com">hello@triovoyage.com</a> — we keep profiles on file.
+          </div>
+        </section>
+      </div>
+
+      <!-- Right: apply panel -->
+      <aside>
+        <div class="apply-panel">
+          <h4>Quick apply</h4>
+          <p class="muted">Apply directly for a role or send us your CV for future openings.</p>
+
+          <form id="apply-form" onsubmit="submitApply(event)" style="margin-top:12px">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" required placeholder="e.g. Ananya Kumar" />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@example.com" />
+
+            <label for="role-select">Role (optional)</label>
+            <input id="role-select" name="role" type="text" placeholder="Role you're applying for" />
+
+            <label for="resume">Resume (PDF)</label>
+            <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" />
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Short intro or LinkedIn profile"></textarea>
+
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <button type="submit" class="btn primary">Send application</button>
+              <button type="button" class="btn secondary" onclick="document.getElementById('resume').value = ''">Clear</button>
+            </div>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <div>
+        <h5>TrioVoyage</h5>
+        <p>Curated tours & bespoke itineraries. Registered travel company.</p>
+      </div>
+
+      <div>
+        <h5>Company</h5>
+        <ul class="footer-links" aria-label="Company links">
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#careers">Careers</a></li>
+          <li><a href="index.html#terms">Terms & Privacy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Contact</h5>
+        <div class="footer-contact">
+          <div><span style="color:#fff">Email:</span> <a href="mailto:hello@triovoyage.com">hello@triovoyage.com</a></div>
+          <div><span style="color:#fff">Phone:</span> <a href="tel:+919876543210">+91 98765 43210</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright">
+      © <span id="year"></span> TrioVoyage. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Modal root -->
+  <div id="modal-root" aria-live="polite"></div>
+
+  <script>
+    // Load shared navbar
+    (function loadNavbar() {
+      const path = '/navbar.html'; // update path if needed
+      fetch(path)
+        .then(r => {
+          if (!r.ok) throw new Error('Navbar load failed');
+          return r.text();
+        })
+        .then(html => {
+          document.getElementById('nav-placeholder').innerHTML = html;
+          // mark active nav link
+          const pathName = window.location.pathname.split('/').pop().toLowerCase();
+          const links = document.querySelectorAll('#main-navbar .nav-link');
+          links.forEach(a => {
+            a.classList.remove('active');
+            const href = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
+            if (href === pathName || (pathName === '' && (href === 'index.html' || href === ''))) {
+              a.classList.add('active');
+            }
+          });
+        })
+        .catch(err => console.warn('Navbar load failed:', err));
+    })();
+
+    // sample job data
+    const jobs = [
+      { id: 1, title: 'Operations Executive', location:'Mumbai / Hybrid', type:'Full-time', short:'Manage partner relations, bookings and day-to-day logistics.', desc:'Responsible for managing hotel & transport partners, coordinating pre-trip checks, handling guest queries and supporting trip operations. 2+ years in travel operations preferred.' },
+      { id: 2, title: 'Product Manager — Tours', location:'Remote', type:'Full-time', short:'Design and curate tour itineraries, partnerships and product improvements.', desc:'Lead itinerary design, supplier negotiation, and product roadmaps. Strong travel product experience and excellent communication skills required.' },
+      { id: 3, title: 'Local Guide (Seasonal)', location:'Various', type:'Contract', short:'Experienced local guides with excellent language skills and local knowledge.', desc:'Delivering safe, informative, and friendly tour experiences. Must have prior guide/license where applicable, first-aid preferred.' }
+    ];
+
+    // render job cards
+    function renderJobs(list){
+      const grid = document.getElementById('jobs-grid');
+      grid.innerHTML = '';
+      list.forEach(j => {
+        const el = document.createElement('div');
+        el.className = 'job';
+        el.innerHTML = `
+          <div class="meta">
+            <h4>${j.title}</h4>
+            <div class="muted">${j.location} • ${j.type}</div>
+            <p class="short">${j.short}</p>
+          </div>
+          <div class="btns">
+            <button class="btn secondary" onclick="viewJob(${j.id})">View details</button>
+            <button class="btn primary" onclick="openApply('${j.title}')">Apply</button>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+    renderJobs(jobs);
+
+    // view job modal
+    function viewJob(id){
+      const j = jobs.find(x=>x.id===id);
+      if(!j) return;
+      const root = document.getElementById('modal-root');
+      root.innerHTML = `
+        <div class="modal-backdrop" role="dialog" aria-modal="true" aria-label="${j.title} details">
+          <div class="modal" role="document" tabindex="-1">
+            <div class="modal-header">
+              <h3>${j.title}</h3>
+              <button onclick="closeModal()" aria-label="Close" class="btn secondary">Close</button>
+            </div>
+            <div class="modal-body">
+              <div style="color:var(--muted)">${j.location} • ${j.type}</div>
+              <p style="margin-top:12px">${j.desc}</p>
+              <div style="margin-top:12px">
+                <strong>How to apply</strong>
+                <p class="muted">Use the quick apply form or send your CV to <a href="mailto:hello@triovoyage.com">hello@triovoyage.com</a> with the role in the subject line.</p>
+              </div>
+              <div class="modal-actions">
+                <button class="btn primary" onclick="openApply('${j.title}')">Apply for this role</button>
+                <button class="btn secondary" onclick="closeModal()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      // focus for accessibility
+      const modal = root.querySelector('.modal');
+      setTimeout(()=> modal && modal.focus(), 50);
+    }
+    function closeModal(){ document.getElementById('modal-root').innerHTML = ''; }
+
+    // open apply: prefills role and scrolls to form
+    function openApply(role){
+      document.getElementById('role-select').value = role || '';
+      window.scrollTo({ top: document.querySelector('.apply-panel').offsetTop - 20, behavior:'smooth' });
+      const nameEl = document.getElementById('name');
+      if(nameEl) nameEl.focus();
+    }
+
+    // apply submit (front-end only)
+    function submitApply(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      const payload = {
+        name: data.get('name')?.trim(),
+        email: data.get('email')?.trim(),
+        role: data.get('role')?.trim(),
+        message: data.get('message')?.trim(),
+        resume: data.get('resume')?.name || null
+      };
+      if(!payload.name || !payload.email){ alert('Please provide name and email.'); return; }
+      console.log('Application submitted', payload);
+      alert('Thanks — your application has been received. We will review and contact you.');
+      form.reset();
+    }
+
+    // keyboard escape closes modal
+    window.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeModal(); });
+
+    // year in footer
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>

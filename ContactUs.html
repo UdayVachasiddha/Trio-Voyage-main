@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact Us — TrioVoyage</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f7f9;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent1:#0ea5a4;
+      --accent2:#2563eb;
+      --glass: rgba(255,255,255,0.62);
+      --footer-bg: #0b1730;
+      --footer-muted: #93a0b8;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#fbfbfd,#f7f7f9);color:#0b1220;-webkit-font-smoothing:antialiased;line-height:1.45}
+    .container{max-width:1200px;margin:0 auto;padding:28px 20px}
+
+/* NAV placeholder */
+#main-navbar { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+
+/* Hero */
+.hero{
+  position:relative;
+  background-image:url('https://images.unsplash.com/photo-1423592707957-763ebe0c7484?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;background-position:center;padding:72px 0 56px;color:#fff;
+}
+.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.06));pointer-events:none}
+.hero .hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 20px}
+.breadcrumb{opacity:0.95;margin-bottom:12px;font-size:14px}
+.hero h1{margin:0;font-size:34px;line-height:1.03;font-weight:800}
+.hero p.lead{margin-top:10px;opacity:0.95;color:rgba(255,255,255,0.92)}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;margin-top:28px}
+@media (max-width:980px){ .layout{grid-template-columns:1fr} }
+
+/* Contact card */
+.contact-card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 12px 36px rgba(2,6,23,0.04);border:1px solid rgba(15,23,42,0.03)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:700px){ .contact-grid{grid-template-columns:1fr} }
+
+.field{display:flex;flex-direction:column;margin-bottom:12px}
+.field label{font-size:13px;color:var(--muted);margin-bottom:6px}
+.field input, .field textarea, .field select{
+  padding:12px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);font-size:14px;background:#fff;outline:none;
+}
+
+/* contact info box */
+.info-box{background:linear-gradient(180deg,#fff,#fbfdff);padding:18px;border-radius:12px;border:1px solid rgba(15,23,42,0.03);box-shadow:0 12px 36px rgba(2,6,23,0.04)}
+.info-box h4{margin:0 0 8px 0}
+.info-row{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.info-icon{width:44px;height:44px;border-radius:10px;background:#eef6ff;display:flex;align-items:center;justify-content:center;color:var(--accent2);font-weight:700}
+
+/* map placeholder */
+.map{
+  width:100%;
+  height:320px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#e9f3ff,#fff);
+  border:1px solid rgba(15,23,42,0.03);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  font-size:14px;
+  box-shadow:0 10px 30px rgba(2,6,23,0.04);
+}
+
+/* small utilities */
+.btn{padding:12px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-family:inherit;}
+.btn.primary{background:linear-gradient(135deg,#0ea5a4,#2563eb);color:#fff;box-shadow:0 10px 30px rgba(37,99,235,0.18);transition:transform 0.15s,box-shadow 0.15s;}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(37,99,235,0.28);}
+.muted{color:var(--muted)}
+.kicker{display:inline-block;background:linear-gradient(135deg,#eff6ff,#dbeafe);padding:6px 12px;border-radius:999px;font-size:13px;color:#2563eb;font-weight:700;border:1px solid rgba(37,99,235,0.12);}
+/* form fields */
+input,textarea,select,button{font-family:inherit;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(37,99,235,0.25);box-shadow:0 0 0 3px rgba(37,99,235,0.06);outline:none;}
+
+/* Footer */
+.site-footer{
+  background:var(--footer-bg);
+  color:var(--footer-muted);
+  padding:42px 20px;
+  margin-top:30px;
+}
+.site-footer .footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:28px;
+  align-items:start;
+}
+.site-footer h5{color:#ffffff;margin:0 0 14px 0;font-size:16px}
+.site-footer p, .site-footer a, .site-footer li {color:var(--footer-muted);font-size:14px;line-height:1.6;margin:0;text-decoration:none}
+.site-footer a:hover{color:#fff}
+.container.copyright{border-top:1px solid rgba(255,255,255,0.03);padding-top:22px;margin-top:26px;color:#93a0b8;font-size:13px}
+
+/* responsive */
+@media (max-width:700px){
+  .hero h1{font-size:28px}
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR: loaded from navbar.html -->
+  <nav id="main-navbar" class="nav-wrap" aria-label="Main navigation" style="font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;">
+  <div style="max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12);font-size:18px">TV</div>
+        <div style="line-height:1">
+          <div style="font-weight:700">TrioVoyage</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px">Curated tours · Trusted travel</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="nav-toggle" aria-expanded="false" aria-controls="nav-links" style="display:none;padding:8px 10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;cursor:pointer">Menu</button>
+
+      <div id="nav-links" style="display:flex;gap:18px;align-items:center">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="aboutus.html">Our Story</a>
+        <a class="nav-link" href="faq.html">FAQ's</a>
+        <a class="nav-link" href="Blogs.html">Blogs</a>
+        <a class="nav-link" href="Career.html">Careers</a>
+        <a class="nav-link" href="ContactUs.html">Contact</a>
+        <a href="contact.html" class="nav-cta" style="margin-left:12px;padding:9px 14px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12)">Request Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* small navbar styles included so this fragment works when injected */
+    #main-navbar .nav-link{color:#475569;text-decoration:none;font-weight:600;font-size:14px}
+    #main-navbar .nav-link.active{color:#2563eb;border-bottom:2px solid #2563eb;padding-bottom:4px}
+
+    /* responsive: show toggle on small screens and hide links */
+    @media (max-width:880px){
+      #nav-toggle{display:inline-block}
+      #nav-links{display:none;flex-direction:column;background:rgba(255,255,255,0.98);position:absolute;left:12px;right:12px;top:72px;padding:14px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.08)}
+      #nav-links a{display:block;padding:8px 6px}
+    }
+  </style>
+
+  <script>
+    // Navbar behaviour: toggle for mobile + active-link marking
+    (function(){
+      const toggle = document.getElementById('nav-toggle');
+      const links = document.getElementById('nav-links');
+      if(toggle && links){
+        toggle.addEventListener('click', ()=>{
+          const expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!expanded));
+          links.style.display = expanded ? 'none' : 'flex';
+        });
+      }
+
+      // mark active nav-link based on current URL
+      function markActive(){
+        const path = window.location.pathname.split('/').pop().toLowerCase();
+        const navLinks = document.querySelectorAll('#main-navbar .nav-link');
+        navLinks.forEach(a=>{
+          a.classList.remove('active');
+          const href = (a.getAttribute('href')||'').split('/').pop().toLowerCase();
+          if(href === path || (path === '' && (href === 'index.html' || href === ''))) a.classList.add('active');
+        });
+      }
+      // run after short delay in case fragment injected dynamically
+      setTimeout(markActive, 50);
+      window.addEventListener('popstate', markActive);
+    })();
+  </script>
+</nav>
+
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-labelledby="contact-title">
+    <div class="overlay" aria-hidden></div>
+    <div class="hero-inner">
+      <div class="breadcrumb">Home › <strong>Contact us</strong></div>
+      <h1 id="contact-title">Get in touch with TrioVoyage</h1>
+      <p class="lead">Questions about a trip, booking, or group travel? We’re here to help — reach out and we’ll get back quickly.</p>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top:28px">
+    <div class="layout">
+      <!-- LEFT: contact form + map -->
+      <div>
+        <section class="contact-card" aria-labelledby="contact-form-heading">
+          <h2 id="contact-form-heading" style="margin:0">Contact form</h2>
+          <p class="muted" style="margin-top:6px">Tell us about your trip or query — we aim to reply within one business day.</p>
+
+          <form id="contact-form" style="margin-top:16px" onsubmit="submitContact(event)" novalidate>
+            <div class="contact-grid">
+              <div class="field">
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" required placeholder="e.g. Aisha Khan" />
+              </div>
+              <div class="field">
+                <label for="phone">Phone / WhatsApp</label>
+                <input id="phone" name="phone" type="tel" placeholder="+91 98xxxxxxx" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@example.com" />
+            </div>
+
+            <div class="field">
+              <label for="type">Enquiry type</label>
+              <select id="type" name="type" aria-label="Enquiry type">
+                <option value="general">General enquiry</option>
+                <option value="booking">Booking / availability</option>
+                <option value="group">Group booking</option>
+                <option value="partnership">Partner / supplier</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="Share dates, destinations or specific questions" required></textarea>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:center">
+              <button type="submit" class="btn primary">Send message</button>
+              <button type="button" class="btn" onclick="document.getElementById('contact-form').reset()">Clear</button>
+              <div class="muted" style="font-size:13px;margin-left:auto">Or call: <strong style="color:#fff;background:var(--accent2);padding:6px 8px;border-radius:6px;margin-left:8px">+91 98765 43210</strong></div>
+            </div>
+          </form>
+        </section>
+
+        <div style="height:18px"></div>
+
+        <section class="contact-card">
+          <h3 style="margin:0">Our office</h3>
+          <p class="muted" style="margin-top:6px">Visit or write to us for corporate enquiries and partnerships.</p>
+
+          <div style="margin-top:12px" aria-hidden="true" style="border-radius:12px;overflow:hidden;">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.006297!2d73.0007!3d19.0776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c06e7a2e4f5f%3A0x7cbe8a7c0f7a0c0!2sSatra%20Plaza%2C%20Palm%20Beach%20Rd%2C%20Vashi%2C%20Navi%20Mumbai!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin"
+              width="100%" height="300" style="border:0;border-radius:12px;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="TrioVoyage Office Location"
+            ></iframe>
+          </div>
+
+          <div style="margin-top:12px;color:var(--muted);font-size:14px">
+            <div><strong>Registered office:</strong> Suite 4B, Landmark Towers, Example Street, Mumbai, India</div>
+            <div style="margin-top:8px"><strong>Support:</strong> support@triovoyage.com · +91 98765 43210</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: contact info / hours / socials -->
+      <aside>
+        <div class="info-box" aria-labelledby="contact-info-heading">
+          <h4 id="contact-info-heading">Contact information</h4>
+
+          <div class="info-row" style="margin-top:10px">
+            <div class="info-icon" aria-hidden>📧</div>
+            <div>
+              <div style="font-weight:700">Email</div>
+              <div class="muted">hello@triovoyage.com</div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-icon" aria-hidden>📞</div>
+            <div>
+              <div style="font-weight:700">Phone</div>
+              <div class="muted">+91 98765 43210 (9:00 — 18:00 IST)</div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-icon" aria-hidden>🕒</div>
+            <div>
+              <div style="font-weight:700">Office hours</div>
+              <div class="muted">Mon — Sat, 9:00 AM — 6:00 PM</div>
+            </div>
+          </div>
+
+          <div style="height:8px"></div>
+          <div class="kicker">Quick links</div>
+          <ul style="margin-top:10px;padding-left:16px;color:var(--muted);line-height:1.6">
+            <li><a href="index.html#packages">Our packages</a></li>
+            <li><a href="faqs.html">FAQs & travel tips</a></li>
+            <li><a href="career.html">Careers</a></li>
+          </ul>
+
+          <div style="height:12px"></div>
+          <div>
+            <div style="font-weight:700;margin-bottom:10px">Follow us</div>
+            <div style="display:flex;gap:8px">
+              <a href="#" aria-label="Instagram" style="text-decoration:none">
+                <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(220,39,67,0.20)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </div>
+              </a>
+              <a href="#" aria-label="Facebook" style="text-decoration:none">
+                <div style="width:42px;height:42px;border-radius:10px;background:#1877f2;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(24,119,242,0.22)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </div>
+              </a>
+              <a href="#" aria-label="LinkedIn" style="text-decoration:none">
+                <div style="width:42px;height:42px;border-radius:10px;background:#0a66c2;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(10,102,194,0.22)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <div>
+        <h5>TrioVoyage</h5>
+        <p>Curated tours & bespoke itineraries. Registered travel company.</p>
+      </div>
+
+      <div>
+        <h5>Company</h5>
+        <ul class="footer-links" aria-label="Company links">
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="career.html">Careers</a></li>
+          <li><a href="faqs.html">FAQ's & Travel tips</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Contact</h5>
+        <div class="footer-contact">
+          <div><span style="color:#fff">Email:</span> <a href="mailto:hello@triovoyage.com">hello@triovoyage.com</a></div>
+          <div><span style="color:#fff">Phone:</span> <a href="tel:+919876543210">+91 98765 43210</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright">
+      © <span id="year"></span> TrioVoyage. All rights reserved.
+    </div>
+  </footer>
+
+  <div id="modal-root" aria-live="polite"></div>
+
+  <script>
+    // Load shared navbar (same approach as other pages)
+    (function loadNavbar() {
+      const path = '/navbar.html'; // change path if necessary
+      fetch(path)
+        .then(r => {
+          if (!r.ok) throw new Error('Navbar load failed');
+          return r.text();
+        })
+        .then(html => {
+          document.getElementById('nav-placeholder').innerHTML = html;
+          // mark active nav link
+          const pathName = window.location.pathname.split('/').pop().toLowerCase();
+          const links = document.querySelectorAll('#main-navbar .nav-link');
+          links.forEach(a => {
+            a.classList.remove('active');
+            const href = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
+            if (href === pathName || (pathName === '' && (href === 'index.html' || href === ''))) {
+              a.classList.add('active');
+            }
+          });
+        })
+        .catch(err => {
+          console.warn('Navbar load failed:', err);
+        });
+    })();
+
+    // Contact form handler (front-end demo)
+    function submitContact(e){
+      e.preventDefault();
+      const f = e.target;
+      const data = {
+        name: f.name.value?.trim(),
+        email: f.email.value?.trim(),
+        phone: f.phone.value?.trim(),
+        type: f.type.value,
+        message: f.message.value?.trim()
+      };
+      if(!data.name || !data.email || !data.message){
+        alert('Please fill name, email and message.');
+        return;
+      }
+      console.log('Contact form submitted', data);
+      alert('Thanks — we received your message. We will reply soon.');
+      f.reset();
+    }
+
+    // set year
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+
+    // close modal on escape / click outside (modal root kept for consistency)
+    window.addEventListener('keydown', (e) => { if(e.key === 'Escape') document.getElementById('modal-root').innerHTML = ''; });
+    document.getElementById('modal-root').addEventListener('click', function(ev){ if(ev.target === this) this.innerHTML = ''; });
+  </script>
+</body>
+</html>

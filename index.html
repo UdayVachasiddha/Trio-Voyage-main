@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TrioVoyage — Curated Tours</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f7f9;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent1:#0ea5a4; /* teal-ish */
+      --accent2:#2563eb; /* blue */
+      --glass: rgba(255,255,255,0.62);
+      --footer-bg: #0b1730; /* dark navy like screenshot */
+      --footer-muted: #93a0b8;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,#fbfbfd 0%, var(--bg) 100%);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    .container{max-width:1200px;margin:0 auto;padding:28px 20px;}
+
+/* NAVBAR (shared) - loaded from navbar.html; styles here ensure consistent look */
+#main-navbar { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+#main-navbar .nav-top { height:6px; background:#0b62c8; } /* top thin blue line */
+
+#main-navbar .nav-row { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.04); }
+#main-navbar .nav-inner {
+  max-width:1200px; margin:0 auto; display:flex; align-items:center;
+  justify-content:center; gap: 32px; padding: 16px 20px; position:relative;
+}
+
+/* Logo sits left and visually overlaps the top line (adjust left/top to match your screenshot) */
+.logo-wrap { position:absolute; left:20px; top:-26px; }
+.logo-img { width:88px; height:88px; border-radius:50%; object-fit:cover; display:block; border:6px solid #fff; box-shadow:0 6px 18px rgba(2,6,23,0.12); }
+
+/* Menu */
+.nav-menu { list-style:none; display:flex; gap:8px; margin:0; padding:0; align-items:center; }
+.nav-menu .nav-link {
+  display:block; padding:18px 22px; color:#111827; text-decoration:none; font-weight:600; font-size:14px;
+  letter-spacing:0.4px; border-radius:2px;
+}
+.nav-menu .nav-link:hover { background: rgba(37,99,235,0.06); color:#0b1220; }
+
+/* Active/selected nav item style (blue pill behind the active menu) */
+.nav-menu .nav-link.active {
+  background:#0b62c8; color:#fff; box-shadow: 0 6px 18px rgba(11,98,200,0.14); padding:18px 26px;
+}
+
+/* Responsive: collapse to a simpler row on smaller screens */
+@media (max-width:900px) {
+  .nav-inner { justify-content:space-between; }
+  .logo-wrap { left:12px; top:-22px; }
+  .nav-menu { gap:6px; overflow-x:auto; padding-bottom:6px; }
+  .nav-menu .nav-link { padding:12px 14px; font-size:13px; white-space:nowrap; }
+}
+
+/* HERO */
+    .hero-wrap{
+      position:relative;
+      height:520px;
+      width:100%;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background-position:center;
+      background-size:cover;
+      background-repeat:no-repeat;
+    }
+    .hero-overlay{
+      position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.12), rgba(2,6,23,0.05));
+      pointer-events:none;
+    }
+
+    .hero-card {
+      position:relative;
+      z-index:5;
+      width:calc(100% - 40px);
+      max-width:1000px;
+      border-radius:18px;
+      background: var(--glass);
+      backdrop-filter: blur(10px) saturate(110%);
+      -webkit-backdrop-filter: blur(10px) saturate(110%);
+      border:1px solid rgba(255,255,255,0.45);
+      box-shadow: 0 20px 60px rgba(2,6,23,0.18);
+      padding:34px;
+      display:flex;
+      gap:28px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .hero-left {
+      flex:1 1 520px;
+      min-width:260px;
+    }
+    .hero-title {
+      margin:0;
+      font-weight:800;
+      line-height:1.03;
+      color: #0b1220;
+      font-size:44px;
+    }
+    @media (min-width:1024px){
+      .hero-title{font-size:56px;}
+    }
+    .hero-sub{margin-top:10px;color:var(--muted);font-size:16px;}
+
+    .search-row {
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .search-input {
+      flex:1;
+      min-width:0;
+      border-radius:999px;
+      padding:14px 18px;
+      border:1px solid rgba(15,23,42,0.06);
+      font-size:15px;
+      outline:none;
+      background:rgba(255,255,255,0.9);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.05);
+    }
+    .search-btn {
+      border-radius:999px;
+      padding:12px 20px;
+      background: linear-gradient(135deg,var(--accent1),var(--accent2));
+      color:#fff;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      white-space:nowrap;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.22);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .search-btn:hover { transform:translateY(-2px); box-shadow: 0 14px 36px rgba(37,99,235,0.28); }
+
+    .badges { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .badge {
+      background:#fff;padding:10px 14px;border-radius:999px;font-size:14px;color:var(--muted);box-shadow:0 10px 24px rgba(2,6,23,0.06);
+    }
+
+    .hero-right {
+      width:220px;
+      min-width:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .hero-preview{
+      width:100%;
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 8px 30px rgba(2,6,23,0.06);
+    }
+    .hero-preview .img{
+      width:100%;height:120px;background-size:cover;background-position:center;
+    }
+    .hero-preview .meta{padding:10px;}
+    .hero-preview .meta h4{margin:0;font-size:14px}
+    .hero-preview .meta p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+/* MAIN CONTENT */
+    .section{padding:30px 0;}
+    .section h2{margin:0 0 8px 0;font-size:22px;}
+    .section p.lead{color:var(--muted);margin:0 0 18px 0;}
+
+    .packages{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    .card{
+      background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(2,6,23,0.05);display:flex;flex-direction:column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover { transform:translateY(-4px); box-shadow:0 20px 48px rgba(2,6,23,0.1); }
+    .card .img{height:200px;background-size:cover;background-position:center;}
+    .card .card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:10px;}
+    .card h4{margin:0;font-size:16px;font-weight:700;}
+    .muted{color:var(--muted);font-size:13px;}
+    .price{font-weight:800;color:var(--accent2);font-size:17px;}
+    .card ul{margin:6px 0 0 16px;padding:0;color:var(--muted);font-size:13px;line-height:1.6;}
+    .card .actions{display:flex;gap:8px;margin-top:auto;}
+    .card .actions button{flex:1;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;transition:transform 0.12s,box-shadow 0.12s;}
+    .card .actions .outline{background:transparent;border:1.5px solid rgba(15,23,42,0.10);color:#0b1220;}
+    .card .actions .outline:hover{background:#f1f5f9;}
+    .card .actions .primary{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;box-shadow:0 8px 24px rgba(37,99,235,0.18);}
+    .card .actions .primary:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(37,99,235,0.28);}
+
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center;}
+    .why-card{background:linear-gradient(180deg,#fff,#fbfdff);padding:16px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.05);border:1px solid rgba(15,23,42,0.03);}
+    .filter-btn{padding:8px 18px;border-radius:999px;border:1.5px solid rgba(15,23,42,0.08);background:#fff;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted);transition:all 0.15s;}
+    .filter-btn.active,.filter-btn:hover{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(37,99,235,0.18);}
+    /* Add font-family inherit for form elements */
+    input,textarea,select,button{font-family:inherit;}
+
+/* Contact & Travel Info — improved styles */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Form inputs */
+.contact-card, .contact-card input, .contact-card textarea {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+.contact-card input[type="text"],
+.contact-card input[type="email"],
+.contact-card input[type="tel"],
+.contact-card textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,0.06);
+  background: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 6px 18px rgba(2,6,23,0.03);
+  outline: none;
+  font-size: 15px;
+  color: #0b1220;
+  transition: box-shadow .15s ease, transform .08s ease, border-color .12s ease;
+}
+.contact-card input:focus,
+.contact-card textarea:focus {
+  border-color: rgba(37,99,235,0.18);
+  box-shadow: 0 10px 30px rgba(37,99,235,0.08);
+  transform: translateY(-1px);
+}
+
+/* Buttons */
+.btn-row { display:flex; gap:12px; align-items:center; margin-top:12px; flex-wrap:wrap; }
+.btn-primary {
+  background: linear-gradient(90deg,#06b6d4,#2563eb);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 34px rgba(37,99,235,0.12);
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(15,23,42,0.08);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #0b1220;
+}
+
+/* Travel Info card */
+.contact-info {
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(2,6,23,0.06);
+  border: 1px solid rgba(15,23,42,0.03);
+  position: sticky;
+  top: 28px;
+  min-height: 220px;
+}
+
+/* Travel info list — dt left, dd right */
+.contact-info dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px 18px;
+  align-items: center;
+  margin: 10px 0 0 0;
+}
+.contact-info dt {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+.contact-info dd {
+  margin: 0;
+  font-weight: 800;
+  color: #0b1220;
+  text-align: right;
+  font-size: 15px;
+}
+
+/* small guidance text */
+.contact-info .note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Responsive: move card below form on small screens */
+@media (max-width: 960px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-info { position: relative; top: auto; }
+  .contact-info dd { text-align: left; }
+}
+
+/* form container card */
+.contact-card {
+  background: transparent; /* keep transparent; inputs provide card feel */
+}
+
+
+/* FOOTER (new) */
+    .site-footer{
+      background:var(--footer-bg);
+      color:var(--footer-muted);
+      padding:42px 20px;
+      margin-top:30px;
+    }
+    .site-footer .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:28px;
+      align-items:start;
+    }
+    .site-footer h5{
+      color:#ffffff;
+      margin:0 0 14px 0;
+      font-size:16px;
+    }
+    .site-footer p, .site-footer a, .site-footer li {
+      color:var(--footer-muted);
+      font-size:14px;
+      line-height:1.6;
+      margin:0;
+      text-decoration:none;
+    }
+    .site-footer a:hover{color:#fff}
+    .footer-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+    .footer-contact{display:flex;flex-direction:column;gap:8px}
+
+    .site-footer .copyright{
+      margin-top:20px;
+      color:#93a0b8;
+      font-size:13px;
+    }
+
+    @media (max-width:900px){
+      .site-footer .footer-inner{grid-template-columns:1fr;gap:20px}
+      .site-footer h5{text-align:left}
+    }
+
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.5);display:flex;align-items:center;justify-content:center;z-index:90}
+    .modal{width:95%;max-width:920px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(2,6,23,0.3)}
+    .modal .modal-img{height:300px;background-size:cover;background-position:center}
+    .modal .modal-body{padding:18px}
+    .modal .modal-actions{display:flex;gap:10px;margin-top:18px}
+
+/* RESPONSIVE */
+    @media (max-width:980px){
+      .packages{grid-template-columns:repeat(2,1fr);}
+      .why-grid{grid-template-columns:1fr;}
+      .contact-grid{grid-template-columns:1fr;}
+      .hero-card{padding:22px;}
+      .hero-right{width:180px}
+    }
+    @media (max-width:700px){
+      .hero-wrap{height:auto;padding:44px 20px 60px;}
+      .hero-card{flex-direction:column;align-items:flex-start;padding:20px;}
+      .hero-title{font-size:28px;}
+      .packages{grid-template-columns:1fr;}
+      nav.links{display:none}
+      .hero-preview .img{height:110px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR: loaded from navbar.html so it's identical across pages -->
+<!-- navbar.html - shared navigation fragment for TrioVoyage pages -->
+<nav id="main-navbar" class="nav-wrap" aria-label="Main navigation" style="font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;">
+  <div style="max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12);font-size:18px">TV</div>
+        <div style="line-height:1">
+          <div style="font-weight:700">TrioVoyage</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px">Curated tours · Trusted travel</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="nav-toggle" aria-expanded="false" aria-controls="nav-links" style="display:none;padding:8px 10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;cursor:pointer">Menu</button>
+
+      <div id="nav-links" style="display:flex;gap:18px;align-items:center">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="aboutus.html">Our Story</a>
+        <a class="nav-link" href="faq.html">FAQ's</a>
+        <a class="nav-link" href="Blogs.html">Blogs</a>
+        <a class="nav-link" href="Career.html">Careers</a>
+        <a class="nav-link" href="ContactUs.html">Contact</a>
+        <a href="contact.html" class="nav-cta" style="margin-left:12px;padding:9px 14px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12)">Request Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* small navbar styles included so this fragment works when injected */
+    #main-navbar .nav-link{color:#475569;text-decoration:none;font-weight:600;font-size:14px}
+    #main-navbar .nav-link.active{color:#2563eb;border-bottom:2px solid #2563eb;padding-bottom:4px}
+
+    /* responsive: show toggle on small screens and hide links */
+    @media (max-width:880px){
+      #nav-toggle{display:inline-block}
+      #nav-links{display:none;flex-direction:column;background:rgba(255,255,255,0.98);position:absolute;left:12px;right:12px;top:72px;padding:14px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.08)}
+      #nav-links a{display:block;padding:8px 6px}
+    }
+  </style>
+
+  <script>
+    // Navbar behaviour: toggle for mobile + active-link marking
+    (function(){
+      const toggle = document.getElementById('nav-toggle');
+      const links = document.getElementById('nav-links');
+      if(toggle && links){
+        toggle.addEventListener('click', ()=>{
+          const expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!expanded));
+          links.style.display = expanded ? 'none' : 'flex';
+        });
+      }
+
+      // mark active nav-link based on current URL
+      function markActive(){
+        const path = window.location.pathname.split('/').pop().toLowerCase();
+        const navLinks = document.querySelectorAll('#main-navbar .nav-link');
+        navLinks.forEach(a=>{
+          a.classList.remove('active');
+          const href = (a.getAttribute('href')||'').split('/').pop().toLowerCase();
+          if(href === path || (path === '' && (href === 'index.html' || href === ''))) a.classList.add('active');
+        });
+      }
+      // run after short delay in case fragment injected dynamically
+      setTimeout(markActive, 50);
+      window.addEventListener('popstate', markActive);
+    })();
+  </script>
+</nav>
+
+
+  <main>
+    <!-- HERO (kept same) -->
+    <section class="hero-wrap" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1600&q=80')">
+      <div class="hero-overlay" aria-hidden></div>
+
+      <div class="hero-card container" role="region" aria-label="Hero: Discover tours">
+        <div class="hero-left">
+          <h2 class="hero-title">Discover handpicked tours — travel beautifully.</h2>
+          <p class="hero-sub">Custom itineraries, expert guides, and seamless transfers. Travel smarter, not harder.</p>
+
+          <div class="search-row" role="search" aria-label="Search tours">
+            <input id="search-input" class="search-input" placeholder="Search destinations or keywords" />
+            <button class="search-btn" onclick="applySearch()">Search</button>
+          </div>
+
+          <div class="badges" aria-hidden>
+            <div class="badge">Best Price</div>
+            <div class="badge">Trusted Guides</div>
+            <div class="badge">Small Groups</div>
+          </div>
+        </div>
+
+        <div class="hero-right" aria-hidden>
+          <div class="hero-preview" title="Sample package">
+            <div class="img" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=60')"></div>
+            <div class="meta">
+              <h4>Paris & Swiss Highlights</h4>
+              <p class="muted">9 days · 7 nights · from ₹1,45,999</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section id="packages" class="section container" aria-labelledby="packages-h">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <h2 id="packages-h">Featured Packages</h2>
+          <p class="lead">Popular handpicked itineraries for your next holiday.</p>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+          <button class="filter-btn" onclick="setFilter(this,'europe')">Europe</button>
+          <button class="filter-btn" onclick="setFilter(this,'asia')">Asia</button>
+        </div>
+      </div>
+
+      <div class="packages" id="packages-grid" aria-live="polite" style="margin-top:18px">
+        <!-- JavaScript will inject cards here -->
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why" class="section" aria-labelledby="why-h">
+      <div class="container why-grid" style="align-items:center">
+        <div class="why-card">
+          <h3 id="why-h">Why travel with TrioVoyage?</h3>
+          <p class="muted">We blend local expertise with carefully designed comfort — from start to finish.</p>
+          <ul style="margin-top:12px;color:var(--muted)">
+            <li>Small groups for better experience</li>
+            <li>Handpicked hotels and vetted transport</li>
+            <li>Local guides and 24/7 support</li>
+          </ul>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="why-card" style="padding:0;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=60" alt="local guide" style="width:100%;height:160px;object-fit:cover;display:block" />
+            <div style="padding:12px">
+              <strong>Expert Local Guides</strong>
+              <div class="muted" style="margin-top:6px">Insider knowledge, safe navigation and cultural context.</div>
+            </div>
+          </div>
+          <div class="why-card" style="padding:0;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=60" alt="hotel" style="width:100%;height:160px;object-fit:cover;display:block" />
+            <div style="padding:12px">
+              <strong>Comfort-First Hotels</strong>
+              <div class="muted" style="margin-top:6px">We prioritise location, cleanliness and guest reviews.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT + TRAVEL INFO -->
+    <section id="contact" class="section container" aria-labelledby="contact-h">
+  <div class="contact-grid">
+    <!-- Contact Form -->
+    <div>
+      <h3 id="contact-h">Get a tailored quote</h3>
+      <p class="muted">Tell us your travel dates and preferences. We’ll design a plan and price it for you.</p>
+
+      <form id="contact-form" class="contact-card" onsubmit="submitContact(event)" style="margin-top:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <input name="name" placeholder="Full name" required />
+          <input name="email" type="email" placeholder="Email" required />
+        </div>
+
+        <div style="margin-top:12px">
+          <input name="phone" type="tel" placeholder="Phone / WhatsApp" />
+        </div>
+
+        <div style="margin-top:12px">
+          <textarea name="message" rows="5" placeholder="Tell us what you'd like (destinations, dates, group size)"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="btn-primary">Send Enquiry</button>
+          <button type="button" class="btn-ghost" onclick="window.location.href='tel:+919876543210'">Call +91 98765 43210</button>
+          <div style="margin-left:auto;color:var(--muted);font-size:13px;align-self:center">
+            Prefer to chat? WhatsApp us for a quick reply.
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Travel Info card -->
+    <aside class="contact-info" aria-labelledby="travel-info-heading">
+      <h4 id="travel-info-heading" style="margin:0 0 8px 0">Travel Info</h4>
+
+      <dl>
+        <dt>Support</dt>
+        <dd>24/7 Assistance</dd>
+
+        <dt>Group size</dt>
+        <dd>6–18 guests</dd>
+
+        <dt>Flights</dt>
+        <dd>Optional add-on</dd>
+
+        <dt>Custom</dt>
+        <dd>Tailored itineraries</dd>
+      </dl>
+
+      <div class="note">
+        Need inspiration? Check our sample itineraries and seasonal offers — or drop your dates and we’ll prepare options.
+      </div>
+    </aside>
+  </div>
+</section>
+
+  </main>
+
+  <!-- FOOTER (dark three-column) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div>
+        <h5>TrioVoyage</h5>
+        <p>Curated tours & bespoke itineraries. Registered travel company.</p>
+      </div>
+
+      <div>
+        <h5>Company</h5>
+        <ul class="footer-links" aria-label="Company links">
+          <li><a href="#about">About us</a></li>
+          <li><a href="#careers">Careers</a></li>
+          <li><a href="#terms">Terms & Privacy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Contact</h5>
+        <div class="footer-contact">
+          <div><span style="color:#fff">Email:</span> <a href="mailto:hello@triovoyage.com">hello@triovoyage.com</a></div>
+          <div><span style="color:#fff">Phone:</span> <a href="tel:+919876543210">+91 98765 43210</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright" style="border-top:1px solid rgba(255,255,255,0.03);margin-top:26px;padding-top:22px">
+      © <span id="year"></span> TrioVoyage. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- PACKAGE MODAL (hidden) -->
+  <div id="modal-root" aria-live="polite"></div>
+
+  <script>
+    /* ---------------------------
+       Load shared navbar (single source of truth)
+       Put navbar.html at project root or adjust the path below
+       --------------------------- */
+    (function loadNavbar() {
+      const path = '/navbar.html'; // <-- change if navbar file is in different folder (e.g. './navbar.html' or '../navbar.html')
+      fetch(path)
+        .then(r => {
+          if (!r.ok) throw new Error('Navbar load failed');
+          return r.text();
+        })
+        .then(html => {
+          document.getElementById('nav-placeholder').innerHTML = html;
+
+          // mark active link according to current filename
+          const pathName = window.location.pathname.split('/').pop().toLowerCase();
+          const links = document.querySelectorAll('#main-navbar .nav-link');
+          links.forEach(a => {
+            a.classList.remove('active');
+            const href = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
+            if (href === pathName || (pathName === '' && (href === 'index.html' || href === ''))) {
+              a.classList.add('active');
+            }
+          });
+
+          // small accessibility fix: add aria-current to active link
+          const active = document.querySelector('#main-navbar .nav-link.active');
+          if (active) active.setAttribute('aria-current', 'page');
+        })
+        .catch(err => {
+          console.warn('Navbar load failed:', err);
+          // fallback: simple header so page is still usable
+          document.getElementById('nav-placeholder').innerHTML = `
+            <header style="background:#fff;padding:12px 20px;border-bottom:1px solid #eee">
+              <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">TV</div>
+                  <div><strong>TrioVoyage</strong></div>
+                </div>
+                <nav><a href="index.html" style="margin-right:12px">Home</a><a href="services.html">Services</a></nav>
+              </div>
+            </header>
+          `;
+        });
+    })();
+
+    // Data for packages (sample)
+    const packages = [
+      {
+        id:1,
+        title:'Paris & Swiss Highlights',
+        subtitle:'9 days · 7 nights',
+        price:'₹1,45,999',
+        img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1600&q=60',
+        bullets:['Eiffel Tower visit','Lucerne lake cruise','Mountain train to Jungfrau'],
+        short:'Experience the romance of Paris and the alpine magic of Switzerland in one elegant trip.',
+        category:'europe'
+      },
+      {
+        id:2,
+        title:'Frankfurt • Amsterdam • Paris',
+        subtitle:'7 days · 6 nights',
+        price:'₹1,09,499',
+        img:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1600&q=60',
+        bullets:['Canal tour in Amsterdam','Paris walking tour','Local cuisine tasting'],
+        short:'Culture, canals, and cobbled streets — a classic European sampler.',
+        category:'europe'
+      },
+      {
+        id:3,
+        title:'Grand European Circuit',
+        subtitle:'12 days · 10 nights',
+        price:'₹2,49,999',
+        img:'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1600&q=80',
+        bullets:['Multicity coach transfers','Luxury hotel stays','Local guides included'],
+        short:'Visit multiple European gems with comfortable transfers and curated stays.',
+        category:'europe'
+      }
+    ];
+
+    function renderPackages(list){
+      const grid = document.getElementById('packages-grid');
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const el = document.createElement('article');
+        el.className = 'card';
+        el.innerHTML = `
+          <div class="img" style="background-image:url('${p.img}')"></div>
+          <div class="card-body">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div>
+                <h4>${p.title}</h4>
+                <div class="muted">${p.subtitle}</div>
+              </div>
+              <div style="text-align:right">
+                <div class="price">${p.price}</div>
+                <div class="muted" style="font-size:12px">per person</div>
+              </div>
+            </div>
+            <p class="muted" style="margin-top:6px">${p.short}</p>
+            <ul>${p.bullets.slice(0,3).map(b=>`<li>${b}</li>`).join('')}</ul>
+            <div class="actions">
+              <button class="outline" onclick="openDetails(${p.id})">View Details</button>
+              <button class="primary" onclick="bookNow(${p.id})">Book Now</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    renderPackages(packages);
+
+    function applySearch(){
+      const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
+      const filtered = packages.filter(p => p.title.toLowerCase().includes(q) || p.short.toLowerCase().includes(q) || p.bullets.join(' ').toLowerCase().includes(q));
+      renderPackages(filtered);
+    }
+
+    let currentCat = 'all';
+    function setFilter(btn, cat){
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = cat;
+      if(cat === 'all'){ renderPackages(packages); return; }
+      renderPackages(packages.filter(p=>p.category === cat));
+    }
+
+    function openDetails(id){
+      const p = packages.find(x=>x.id===id);
+      if(!p) return;
+      const root = document.getElementById('modal-root');
+      root.innerHTML = `
+        <div class="modal-backdrop" role="dialog" aria-modal="true" aria-label="${p.title} details">
+          <div class="modal" role="document">
+            <div class="modal-img" style="background-image:url('${p.img}')"></div>
+            <div class="modal-body">
+              <div style="display:flex;justify-content:space-between;align-items:start">
+                <div>
+                  <h3 style="margin:0">${p.title}</h3>
+                  <div class="muted">${p.subtitle}</div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-weight:800;color:var(--accent2)">${p.price}</div>
+                </div>
+              </div>
+              <p class="muted" style="margin-top:10px">${p.short} Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <ul style="margin-top:10px">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+              <div class="modal-actions">
+                <button class="btn primary" onclick="bookNow(${p.id})">Book This Trip</button>
+                <button class="btn ghost" onclick="closeModal()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    function closeModal(){ document.getElementById('modal-root').innerHTML = ''; }
+
+    function bookNow(id){
+      const p = packages.find(x=>x.id===id);
+      if(!p) return alert('Proceed to booking for: ' + (p && p.title));
+      openDetails(id);
+      const form = document.querySelector('#contact-form');
+      if (form) {
+        form.name.value = '';
+        form.message.value = `Hi, I'm interested in booking: ${p.title} (${p.subtitle}). Please send details.`;
+        window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+      }
+    }
+
+    function submitContact(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        message: form.message.value.trim()
+      };
+      if(!data.name || !data.email){ alert('Please provide name & email.'); return; }
+      console.log('Contact enquiry:', data);
+      alert('Thanks! We received your enquiry — we will contact you shortly.');
+      form.reset();
+    }
+
+    // set footer year
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+
+    // keyboard: ESC closes modal
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeModal();
+    });
+
+    // click outside modal content closes it
+    document.getElementById('modal-root').addEventListener('click', function(ev){
+      if(ev.target === this) closeModal();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAQ's & Travel Tips — TrioVoyage</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f7f9;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --glass: rgba(255,255,255,0.62);
+      --footer-bg:#0b1730;
+      --footer-muted:#93a0b8;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#fbfbfd,#f7f7f9);color:#0b1220;-webkit-font-smoothing:antialiased;line-height:1.45}
+    .container{max-width:1200px;margin:0 auto;padding:28px 20px}
+
+/* Shared navbar styles (navbar.html will be injected) */
+#main-navbar { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+
+/* Hero */
+.hero{
+  position:relative;
+  background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=1600&q=80');
+  background-size:cover;background-position:center;padding:72px 0 56px;color:#fff;
+}
+.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.28), rgba(2,6,23,0.06));pointer-events:none}
+.hero .hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 20px}
+.breadcrumb{opacity:0.95;margin-bottom:12px;font-size:14px}
+.hero h1{margin:0;font-size:34px;line-height:1.03;font-weight:800}
+.hero p.lead{margin-top:10px;opacity:0.95;color:rgba(255,255,255,0.92)}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;margin-top:28px}
+@media (max-width:980px){ .layout{grid-template-columns:1fr} }
+
+/* FAQ area */
+.faq-card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 12px 36px rgba(2,6,23,0.04);border:1px solid rgba(15,23,42,0.03)}
+.search-row{display:flex;gap:10px;margin-bottom:16px}
+.search-row input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);font-size:14px}
+.search-row button{padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;border:none;cursor:pointer}
+
+/* Accordion */
+.accordion{margin-top:8px;border-radius:8px;overflow:hidden;}
+.faq-item{border-top:1px solid rgba(15,23,42,0.05);background:transparent;}
+.faq-item:first-child{border-top:0;}
+.faq-question{
+  display:flex;align-items:center;justify-content:space-between;padding:16px 14px;cursor:pointer;
+  background:linear-gradient(180deg,#fff,#fcfdff);
+  transition:background 0.15s;
+}
+.faq-question:hover{background:#f8faff;}
+.faq-question h4{margin:0;font-size:15px;font-weight:700;}
+.faq-chevron{width:22px;height:22px;border-radius:999px;background:rgba(37,99,235,0.08);display:flex;align-items:center;justify-content:center;color:#2563eb;font-size:14px;font-weight:700;transition:transform 0.2s ease;}
+.faq-item[aria-expanded="true"] .faq-chevron{transform:rotate(45deg);background:linear-gradient(135deg,#0ea5a4,#2563eb);color:#fff;}
+.faq-panel{padding:0 14px 16px 14px;color:var(--muted);font-size:14px;line-height:1.7;display:none;}
+.faq-item[aria-expanded="true"] .faq-panel{display:block;}
+
+/* Travel tips */
+.tips{margin-top:18px;background:linear-gradient(135deg,#eff6ff,#dbeafe);padding:18px;border-radius:12px;border:1px solid rgba(37,99,235,0.10);}
+.tips h4{margin:0 0 10px 0;color:#1d4ed8;}
+.tips ul{margin:0;padding-left:18px;color:#334155;line-height:1.7;}
+.tips li::marker{color:#2563eb;}
+
+/* Sidebar */
+.aside-card{background:linear-gradient(180deg,#fff,#fbfdff);padding:18px;border-radius:12px;border:1px solid rgba(15,23,42,0.03);box-shadow:0 12px 36px rgba(2,6,23,0.04)}
+.aside-card h4{margin:0 0 10px 0}
+.aside-card p{color:var(--muted);margin:0 0 12px 0}
+.aside-card .contact-btn{display:flex;gap:10px;align-items:center}
+.aside-card .contact-btn a{display:inline-block;background:var(--accent);color:#fff;padding:10px 12px;border-radius:8px;text-decoration:none;font-weight:700}
+
+/* Footer consistent with other pages */
+.site-footer{
+  background:var(--footer-bg);
+  color:var(--footer-muted);
+  padding:42px 20px;
+  margin-top:30px;
+}
+.site-footer .footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:28px;
+  align-items:start;
+}
+.site-footer h5{color:#ffffff;margin:0 0 14px 0;font-size:16px}
+.site-footer p, .site-footer a, .site-footer li {color:var(--footer-muted);font-size:14px;line-height:1.6;margin:0;text-decoration:none}
+.site-footer a:hover{color:#fff}
+.container.copyright{border-top:1px solid rgba(255,255,255,0.03);padding-top:22px;margin-top:26px;color:#93a0b8;font-size:13px}
+
+.kicker{display:inline-block;background:linear-gradient(135deg,#eff6ff,#dbeafe);padding:6px 12px;border-radius:999px;font-size:13px;color:#2563eb;font-weight:700;border:1px solid rgba(37,99,235,0.12);}
+.muted{color:var(--muted)}
+input,textarea,button,select{font-family:inherit;}
+
+/* responsive */
+@media (max-width:700px){
+  .search-row{flex-direction:column}
+  .search-row button{width:100%}
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR: loaded from navbar.html -->
+  <nav id="main-navbar" class="nav-wrap" aria-label="Main navigation" style="font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;">
+  <div style="max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12);font-size:18px">TV</div>
+        <div style="line-height:1">
+          <div style="font-weight:700">TrioVoyage</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px">Curated tours · Trusted travel</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="nav-toggle" aria-expanded="false" aria-controls="nav-links" style="display:none;padding:8px 10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;cursor:pointer">Menu</button>
+
+      <div id="nav-links" style="display:flex;gap:18px;align-items:center">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="aboutus.html">Our Story</a>
+        <a class="nav-link" href="faq.html">FAQ's</a>
+        <a class="nav-link" href="Blogs.html">Blogs</a>
+        <a class="nav-link" href="Career.html">Careers</a>
+        <a class="nav-link" href="ContactUs.html">Contact</a>
+        <a href="contact.html" class="nav-cta" style="margin-left:12px;padding:9px 14px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12)">Request Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* small navbar styles included so this fragment works when injected */
+    #main-navbar .nav-link{color:#475569;text-decoration:none;font-weight:600;font-size:14px}
+    #main-navbar .nav-link.active{color:#2563eb;border-bottom:2px solid #2563eb;padding-bottom:4px}
+
+    /* responsive: show toggle on small screens and hide links */
+    @media (max-width:880px){
+      #nav-toggle{display:inline-block}
+      #nav-links{display:none;flex-direction:column;background:rgba(255,255,255,0.98);position:absolute;left:12px;right:12px;top:72px;padding:14px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.08)}
+      #nav-links a{display:block;padding:8px 6px}
+    }
+  </style>
+
+  <script>
+    // Navbar behaviour: toggle for mobile + active-link marking
+    (function(){
+      const toggle = document.getElementById('nav-toggle');
+      const links = document.getElementById('nav-links');
+      if(toggle && links){
+        toggle.addEventListener('click', ()=>{
+          const expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!expanded));
+          links.style.display = expanded ? 'none' : 'flex';
+        });
+      }
+
+      // mark active nav-link based on current URL
+      function markActive(){
+        const path = window.location.pathname.split('/').pop().toLowerCase();
+        const navLinks = document.querySelectorAll('#main-navbar .nav-link');
+        navLinks.forEach(a=>{
+          a.classList.remove('active');
+          const href = (a.getAttribute('href')||'').split('/').pop().toLowerCase();
+          if(href === path || (path === '' && (href === 'index.html' || href === ''))) a.classList.add('active');
+        });
+      }
+      // run after short delay in case fragment injected dynamically
+      setTimeout(markActive, 50);
+      window.addEventListener('popstate', markActive);
+    })();
+  </script>
+</nav>
+
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-labelledby="faq-title">
+    <div class="overlay" aria-hidden></div>
+    <div class="hero-inner">
+      <div class="breadcrumb">Home › <strong>FAQ's & Travel Tips</strong></div>
+      <h1 id="faq-title">FAQ's & Travel Tips</h1>
+      <p class="lead">Common questions and practical travel advice to help you plan a smoother trip.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="layout">
+      <!-- LEFT: FAQ + tips -->
+      <div>
+        <section class="faq-card" aria-labelledby="faq-heading">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <h2 id="faq-heading" style="margin:0">Frequently asked questions</h2>
+              <p class="muted" style="margin-top:6px">Search or browse common questions about bookings, payments, cancellations and travel safety.</p>
+            </div>
+            <div style="margin-left:20px">
+              <div class="kicker">Need help?</div>
+            </div>
+          </div>
+
+          <div class="search-row" style="margin-top:12px">
+            <input id="faq-search" type="search" placeholder="Search FAQs (e.g. refunds, visas, luggage)" aria-label="Search FAQs" />
+            <button id="faq-search-btn" aria-label="Search">Search</button>
+          </div>
+
+          <div class="accordion" id="faq-accordion" role="list">
+            <!-- FAQ items will be injected here by JS -->
+          </div>
+
+          <div class="tips" aria-labelledby="tips-heading">
+            <h4 id="tips-heading">Top travel tips</h4>
+            <ul>
+              <li>Carry a photocopy of passport and emergency contact details separately.</li>
+              <li>Keep medicines and important documents in carry-on luggage.</li>
+              <li>Book transfers in advance during peak season to avoid delays.</li>
+              <li>Use local currency for small purchases — card fees can add up.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: Sidebar quick-enquiry -->
+      <aside>
+        <div class="aside-card">
+          <h4>Quick enquiry</h4>
+          <p class="muted">Can't find your answer? Send us a quick message and we’ll get back to you.</p>
+
+          <form id="quick-enq" style="margin-top:12px" onsubmit="submitQuickEnq(event)">
+            <input name="name" required placeholder="Full name" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);margin-bottom:8px" />
+            <input name="email" type="email" placeholder="Email (optional)" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);margin-bottom:8px" />
+            <textarea name="message" placeholder="Your question or message" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);min-height:100px;margin-bottom:10px"></textarea>
+            <div class="contact-btn">
+              <button type="submit" class="contact-btn-cta" style="background:var(--accent);color:#fff;padding:10px 12px;border-radius:8px;border:none;font-weight:700;cursor:pointer">Send</button>
+              <a href="tel:+919876543210" style="background:#eef3ff;color:var(--accent);padding:10px 12px;border-radius:8px;text-decoration:none;font-weight:700">Call +91 98765 43210</a>
+            </div>
+          </form>
+
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">
+            <strong>Travel notice</strong>
+            <div style="margin-top:6px">Check passport validity (6+ months) and any visa requirements before booking international travel.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer (shared) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <div>
+        <h5>TrioVoyage</h5>
+        <p>Curated tours & bespoke itineraries. Registered travel company.</p>
+      </div>
+
+      <div>
+        <h5>Company</h5>
+        <ul class="footer-links" aria-label="Company links">
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#careers">Careers</a></li>
+          <li><a href="index.html#terms">Terms & Privacy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Contact</h5>
+        <div class="footer-contact">
+          <div><span style="color:#fff">Email:</span> <a href="mailto:hello@triovoyage.com">hello@triovoyage.com</a></div>
+          <div><span style="color:#fff">Phone:</span> <a href="tel:+919876543210">+91 98765 43210</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright">
+      © <span id="year"></span> TrioVoyage. All rights reserved.
+    </div>
+  </footer>
+
+  <div id="modal-root" aria-live="polite"></div>
+
+  <script>
+    // load shared navbar (same as other pages)
+    (function loadNavbar() {
+      const path = '/navbar.html'; // change if navbar file is elsewhere
+      fetch(path)
+        .then(r => {
+          if (!r.ok) throw new Error('Navbar load failed');
+          return r.text();
+        })
+        .then(html => {
+          document.getElementById('nav-placeholder').innerHTML = html;
+          // mark active link
+          const pathName = window.location.pathname.split('/').pop().toLowerCase();
+          const links = document.querySelectorAll('#main-navbar .nav-link');
+          links.forEach(a => {
+            a.classList.remove('active');
+            const href = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
+            if (href === pathName || (pathName === '' && (href === 'index.html' || href === ''))) {
+              a.classList.add('active');
+            }
+          });
+        })
+        .catch(err => console.warn('Navbar load failed:', err));
+    })();
+
+    // sample FAQ data
+    const faqs = [
+      {
+        id: 'f1',
+        q: 'What is included in the package price?',
+        a: 'Our package price typically includes accommodation, transfers specified in the itinerary, breakfasts and activities mentioned. Flights, visa fees and travel insurance are generally not included unless stated.'
+      },
+      {
+        id: 'f2',
+        q: 'How and when can I pay for my booking?',
+        a: 'We accept bank transfers and card payments. A deposit (usually 20–30%) confirms the booking; the balance is due 30–45 days before departure depending on the itinerary.'
+      },
+      {
+        id: 'f3',
+        q: 'What is your cancellation policy?',
+        a: 'Cancellation charges vary by trip and timing. We provide a clear cancellation chart at time of booking. Please contact us immediately and we will explain the applicable charges and any possible refunds.'
+      },
+      {
+        id: 'f4',
+        q: 'Do you arrange flights and visas?',
+        a: 'Yes — we offer optional flight booking and visa-assistance services. These are handled as add-ons and will be priced separately from the core package.'
+      },
+      {
+        id: 'f5',
+        q: 'Are these trips suitable for solo travellers?',
+        a: 'Many of our departures welcome solo travellers. We also offer single-room supplements on selected departures. Please check the trip notes for single-room availability and pricing.'
+      }
+    ];
+
+    // render FAQ accordion
+    const accordion = document.getElementById('faq-accordion');
+    function renderFAQs(list) {
+      accordion.innerHTML = '';
+      list.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'faq-item';
+        div.id = item.id;
+        div.setAttribute('role', 'listitem');
+        div.setAttribute('aria-expanded', 'false');
+        div.innerHTML = `
+          <div class="faq-question" tabindex="0" aria-controls="${item.id}-panel" aria-expanded="false">
+            <h4>${item.q}</h4>
+            <div class="faq-chevron" aria-hidden>+</div>
+          </div>
+          <div id="${item.id}-panel" class="faq-panel" role="region" aria-labelledby="${item.id}-question">${item.a}</div>
+        `;
+        accordion.appendChild(div);
+      });
+    }
+    renderFAQs(faqs);
+
+    // accordion behaviour (delegate)
+    accordion.addEventListener('click', function(e){
+      const question = e.target.closest('.faq-question');
+      if(!question) return;
+      toggleFAQ(question.parentElement);
+    });
+
+    // keyboard accessibility
+    accordion.addEventListener('keydown', function(e){
+      const question = e.target.closest('.faq-question');
+      if(!question) return;
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleFAQ(question.parentElement);
+      }
+      // optional: arrow navigation can be added later
+    });
+
+    function toggleFAQ(item) {
+      const isOpen = item.getAttribute('aria-expanded') === 'true';
+      // close all
+      document.querySelectorAll('.faq-item').forEach(it => {
+        it.setAttribute('aria-expanded','false');
+        it.querySelector('.faq-question').setAttribute('aria-expanded','false');
+        const chevron = it.querySelector('.faq-chevron');
+        if(chevron) chevron.textContent = '+';
+      });
+      if(!isOpen) {
+        item.setAttribute('aria-expanded','true');
+        const q = item.querySelector('.faq-question');
+        q.setAttribute('aria-expanded','true');
+        const chevron = q.querySelector('.faq-chevron');
+        if(chevron) chevron.textContent = '−';
+      }
+    }
+
+    // search
+    document.getElementById('faq-search-btn').addEventListener('click', doFaqSearch);
+    document.getElementById('faq-search').addEventListener('keypress', function(e){
+      if(e.key === 'Enter') doFaqSearch();
+    });
+
+    function doFaqSearch(){
+      const q = (document.getElementById('faq-search').value || '').toLowerCase().trim();
+      if(!q){ renderFAQs(faqs); return; }
+      const filtered = faqs.filter(f => f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q));
+      if(filtered.length === 0) {
+        accordion.innerHTML = '<div class="faq-item" style="padding:14px">No FAQs matched your search. Try different keywords or contact us.</div>';
+        return;
+      }
+      renderFAQs(filtered);
+    }
+
+    // quick enquiry form
+    function submitQuickEnq(e){
+      e.preventDefault();
+      const f = e.target;
+      const data = { name: f.name?.value || f.querySelector('[name=name]').value, email: f.email?.value || f.querySelector('[name=email]').value, message: f.message?.value || f.querySelector('[name=message]').value };
+      if(!data.name || !data.message){ alert('Please provide name and message.'); return; }
+      console.log('Quick enquiry', data);
+      alert('Thanks — your message has been received. We will get back to you shortly.');
+      f.reset();
+    }
+
+    // set footer year
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+
+    // small modal root handlers left in place for consistency with other pages
+    document.getElementById('modal-root').addEventListener('click', function(ev){
+      if(ev.target === this) this.innerHTML = '';
+    });
+  </script>
+</body>
+</html>

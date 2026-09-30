@@ -1,0 +1,305 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Services ”” TrioVoyage</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f7f9;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.68);
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100%;background:linear-gradient(180deg,#fbfbfd,#f7f7f9);color:#0b1220;-webkit-font-smoothing:antialiased;}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:1140px;margin:0 auto;padding:28px 20px;}
+
+    /* Header (simple) */
+    header{background:#fff;box-shadow:0 6px 20px rgba(2,6,23,0.04);position:sticky;top:0;z-index:40;}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1200px;margin:0 auto;padding:14px 20px;}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#10b981,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    nav.links{display:flex;gap:18px;align-items:center}
+    nav.links a{font-weight:600;color:var(--muted)}
+    .btn{background:var(--accent);color:#fff;padding:9px 14px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+
+    /* Hero + breadcrumb */
+    .hero{
+      background-image:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=1600&q=80');
+      background-size:cover;background-position:center;
+      padding:72px 0 54px;
+      position:relative;
+    }
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.18), rgba(2,6,23,0.06))}
+    .hero .hero-inner{position:relative;z-index:2;color:#fff}
+    .breadcrumb{color:rgba(255,255,255,0.9);font-size:14px;margin-bottom:12px}
+    .hero h1{font-size:34px;margin:0;line-height:1.03;font-weight:800}
+    .hero p.lead{opacity:0.95;margin-top:8px;color:rgba(255,255,255,0.92)}
+
+    /* Layout */
+    .grid{display:grid;grid-template-columns: 1fr 360px;gap:28px;align-items:flex-start}
+    @media (max-width:980px){ .grid{grid-template-columns:1fr} }
+
+    /* Services list */
+    .services{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    @media (max-width:900px){ .services{grid-template-columns:1fr} }
+    .service-card{background:var(--card);border-radius:12px;padding:22px;box-shadow:0 12px 36px rgba(2,6,23,0.06);border:1px solid rgba(15,23,42,0.03);transition:transform 0.2s ease,box-shadow 0.2s ease;}
+    .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(2,6,23,0.10);}
+    .service-card .svc-icon{font-size:28px;margin-bottom:10px;}
+    .service-card h3{margin:0;font-size:18px;font-weight:700;}
+    .service-card p{color:var(--muted);margin:8px 0 0;font-size:14px;line-height:1.5}
+    .service-meta{display:flex;gap:12px;margin-top:12px;align-items:center}
+    .pill{background:linear-gradient(135deg,#eff6ff,#dbeafe);padding:6px 10px;border-radius:999px;font-weight:600;color:#2563eb;font-size:13px;}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+    input, textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(15,23,42,0.08);font-size:14px;font-family:inherit;outline:none;transition:border-color 0.15s,box-shadow 0.15s;}
+    input:focus, textarea:focus{border-color:rgba(37,99,235,0.25);box-shadow:0 0 0 3px rgba(37,99,235,0.06);}
+    textarea{min-height:110px;resize:vertical;}
+    .muted{color:var(--muted)}
+
+    .aside-card{background:linear-gradient(180deg,#fff,#fbfdff);padding:20px;border-radius:12px;border:1px solid rgba(15,23,42,0.03);box-shadow:0 12px 36px rgba(2,6,23,0.04);}
+    .aside-card h4{margin:0 0 10px 0;}
+    .btn{background:var(--accent);color:#fff;padding:11px 18px;border-radius:12px;border:none;font-weight:700;cursor:pointer;font-family:inherit;transition:box-shadow 0.15s,transform 0.12s;box-shadow:0 8px 24px rgba(37,99,235,0.18);}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(37,99,235,0.28);}
+
+    /* small helpers */
+    .muted-small{color:var(--muted);font-size:13px}
+    .section-title{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+    .section-title h2{margin:0;font-size:20px}
+  </style>
+</head>
+<body>
+
+  <!-- navbar.html - shared navigation fragment for TrioVoyage pages -->
+<nav id="main-navbar" class="nav-wrap" aria-label="Main navigation" style="font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;">
+  <div style="max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12);font-size:18px">TV</div>
+        <div style="line-height:1">
+          <div style="font-weight:700">TrioVoyage</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px">Curated tours · Trusted travel</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="nav-toggle" aria-expanded="false" aria-controls="nav-links" style="display:none;padding:8px 10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;cursor:pointer">Menu</button>
+
+      <div id="nav-links" style="display:flex;gap:18px;align-items:center">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="aboutus.html">Our Story</a>
+        <a class="nav-link" href="faq.html">FAQ's</a>
+        <a class="nav-link" href="Blogs.html">Blogs</a>
+        <a class="nav-link" href="Career.html">Careers</a>
+        <a class="nav-link" href="ContactUs.html">Contact</a>
+        <a href="contact.html" class="nav-cta" style="margin-left:12px;padding:9px 14px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(37,99,235,0.12)">Request Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* small navbar styles included so this fragment works when injected */
+    #main-navbar .nav-link{color:#475569;text-decoration:none;font-weight:600;font-size:14px}
+    #main-navbar .nav-link.active{color:#2563eb;border-bottom:2px solid #2563eb;padding-bottom:4px}
+
+    /* responsive: show toggle on small screens and hide links */
+    @media (max-width:880px){
+      #nav-toggle{display:inline-block}
+      #nav-links{display:none;flex-direction:column;background:rgba(255,255,255,0.98);position:absolute;left:12px;right:12px;top:72px;padding:14px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.08)}
+      #nav-links a{display:block;padding:8px 6px}
+    }
+  </style>
+
+  <script>
+    // Navbar behaviour: toggle for mobile + active-link marking
+    (function(){
+      const toggle = document.getElementById('nav-toggle');
+      const links = document.getElementById('nav-links');
+      if(toggle && links){
+        toggle.addEventListener('click', ()=>{
+          const expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!expanded));
+          links.style.display = expanded ? 'none' : 'flex';
+        });
+      }
+
+      // mark active nav-link based on current URL
+      function markActive(){
+        const path = window.location.pathname.split('/').pop().toLowerCase();
+        const navLinks = document.querySelectorAll('#main-navbar .nav-link');
+        navLinks.forEach(a=>{
+          a.classList.remove('active');
+          const href = (a.getAttribute('href')||'').split('/').pop().toLowerCase();
+          if(href === path || (path === '' && (href === 'index.html' || href === ''))) a.classList.add('active');
+        });
+      }
+      // run after short delay in case fragment injected dynamically
+      setTimeout(markActive, 50);
+      window.addEventListener('popstate', markActive);
+    })();
+  </script>
+</nav>
+
+  
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="page-title">
+    <div class="overlay" aria-hidden></div>
+    <div class="hero-inner container">
+      <div class="breadcrumb">Home › <strong>Services</strong></div>
+      <h1 id="page-title">Services</h1>
+      <p class="lead muted-small">Full service travel support ”” visas, flights, hotels and transport solutions, both in Europe and across India.</p>
+    </div>
+  </section>
+
+  <main class="container" style="padding-top:30px;padding-bottom:30px">
+    <div class="grid">
+      <!-- LEFT: services -->
+      <div>
+        <div class="section-title"><h2>What we offer</h2></div>
+
+        <div class="services">
+          <!-- VISA -->
+          <article class="service-card" id="svc-visa" tabindex="0" aria-labelledby="svc-visa-title">
+            <div class="svc-icon">ðŸ›‚</div>
+            <h3 id="svc-visa-title">Visa Assistance</h3>
+            <p>Seamlessly secure your travel visa with expert guidance. We simplify paperwork, check documents, and help you every step of the way so visa processing doesn't slow your plans.</p>
+            <div class="service-meta">
+              <div class="pill">Document checks</div>
+              <div class="pill">Embassy liaison</div>
+            </div>
+          </article>
+
+          <!-- Flights -->
+          <article class="service-card" id="svc-flights" tabindex="0" aria-labelledby="svc-flights-title">
+            <h3 id="svc-flights-title">Flights & Airfares</h3>
+            <p>Book competitive fares with flexible itineraries. We search multi-carrier options, apply promo fares and coordinate group or multi-city bookings to keep your travel smooth.</p>
+            <div class="service-meta">
+              <div class="pill">Instant e-tickets</div>
+              <div class="pill">Group fares</div>
+            </div>
+          </article>
+
+          <!-- Hotels -->
+          <article class="service-card" id="svc-hotels" tabindex="0" aria-labelledby="svc-hotels-title">
+            <h3 id="svc-hotels-title">Hotels & Stays</h3>
+            <p>Handpicked hotels from boutique to luxury. We prioritise location, guest reviews and value so you rest well during your trip.</p>
+            <div class="service-meta">
+              <div class="pill">Curated stays</div>
+              <div class="pill">Special rates</div>
+            </div>
+          </article>
+
+          <!-- Transport in Europe -->
+          <article class="service-card" id="svc-transport-eu" tabindex="0" aria-labelledby="svc-transport-eu-title">
+            <div class="svc-icon">ðŸš†</div>
+            <h3 id="svc-transport-eu-title">Transport in Europe</h3>
+            <p>From private transfers to scenic rail journeys and coach tours ”” we coordinate vehicle types and rail passes tailored to your route and group size.</p>
+            <div class="service-meta">
+              <div class="pill">Rail & scenic routes</div>
+              <div class="pill">Private transfers</div>
+            </div>
+          </article>
+
+          <!-- Road transport India -->
+          <article class="service-card" id="svc-transport-ind" tabindex="0" aria-labelledby="svc-transport-ind-title">
+            <div class="svc-icon">ðŸšŒ</div>
+            <h3 id="svc-transport-ind-title">Road Transport in India</h3>
+            <p>Explore India comfortably ”” cars, vans and coaches with vetted drivers and flexible itineraries, whether it's a hill trip, coastal route or city tour.</p>
+            <div class="service-meta">
+              <div class="pill">AC coaches & cars</div>
+              <div class="pill">Experienced drivers</div>
+            </div>
+          </article>
+        </div>
+
+        <!-- About/Values -->
+        <section style="margin-top:24px" aria-labelledby="about-title">
+          <h3 id="about-title">About TrioVoyage</h3>
+          <p class="muted-small" style="margin-top:8px">
+            We believe in building strong relationships with our clients ”” every traveller is unique, so we take time to understand preferences and craft journeys that matter.
+            Our team combines destination expertise, reliable partners and a focus on customer satisfaction to deliver memorable, hassle-free travel.
+          </p>
+        </section>
+      </div>
+
+      <!-- RIGHT: enquiry card -->
+      <aside>
+        <div class="aside-card quick-enquiry" aria-labelledby="quick-enq-title">
+          <h4 id="quick-enq-title">Get an enquiry</h4>
+
+          <form id="enquiry-form" onsubmit="submitEnquiry(event)" novalidate>
+            <div style="margin-bottom:10px">
+              <label for="enq-name">Name</label>
+              <input id="enq-name" name="name" required placeholder="Full name" />
+            </div>
+            <div class="form-row" style="margin-bottom:10px">
+              <div style="flex:1"><label for="enq-phone">Phone</label><input id="enq-phone" name="phone" required placeholder="Phone number" /></div>
+            </div>
+            <div style="margin-bottom:10px">
+              <label for="enq-email">Email</label>
+              <input id="enq-email" type="email" name="email" placeholder="Email address" />
+            </div>
+            <div style="margin-bottom:12px">
+              <label for="enq-msg">Comment / Message</label>
+              <textarea id="enq-msg" name="message" placeholder="Tell us what you need"></textarea>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="btn" type="submit">Submit</button>
+              <a href="tel:+917021267737" class="muted-small" style="align-self:center">Call +91 70212 67737</a>
+            </div>
+          </form>
+
+          <div style="margin-top:14px" class="muted-small">
+            <strong>Head Office</strong><br/>
+            704, 7th Floor, Satra Plaza, Palm Beach Road, Sector 19D, Vashi, Navi Mumbai ”“ 400703
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner container">
+      <div class="footer-column">
+        <h5>TrioVoyage</h5>
+        <p>Curated tours & bespoke itineraries. Registered travel company.</p>
+      </div>
+      <div class="footer-column">
+        <h5>Company</h5>
+        <p><a href="#about">About us</a> · <a href="#careers">Careers</a> · <a href="#terms">Terms & Privacy</a></p>
+      </div>
+      <div class="footer-column">
+        <h5>Contact</h5>
+        <p>Email: <a href="mailto:sagar@alpsnbanks.com">sagar@alpsnbanks.com</a><br/>Phone: <a href="tel:+917021267737">+91 70212 67737</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function submitEnquiry(e){
+      e.preventDefault();
+      const form = e.target;
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      if(!name || !phone){ alert('Please provide name and phone.'); return; }
+      console.log('Enquiry', {name, phone, email, message});
+      alert('Thanks! Your enquiry has been received. We will contact you shortly.');
+      form.reset();
+    }
+  </script>
+</body>
+</html>
+
+
